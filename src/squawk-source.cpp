@@ -178,7 +178,7 @@ obs_properties_t *squawk_source_properties(void *data)
 	obs_properties_add_text(ppts, "text", MT_("Text"), OBS_TEXT_DEFAULT);
 
 	// add button property for generating audio on demand
-	obs_properties_add_button(
+	obs_properties_add_button2(
 		ppts, "generate_audio", MT_("Generate_Audio"),
 		[](obs_properties_t *props, obs_property_t *property, void *data_) {
 			UNUSED_PARAMETER(props);
@@ -189,7 +189,7 @@ obs_properties_t *squawk_source_properties(void *data)
 			// get settings from source
 			obs_data_t *settings = obs_source_get_settings(squawk_data_->context);
 			std::string text = obs_data_get_string(settings, "text");
-			int speaker_id = (int)obs_data_get_int(settings, "speaker_id");
+			uint32_t speaker_id = (uint32_t)obs_data_get_int(settings, "speaker_id");
 			// release settings
 			obs_data_release(settings);
 
@@ -204,10 +204,10 @@ obs_properties_t *squawk_source_properties(void *data)
 						 squawk_data_->speed);
 
 			return true;
-		});
+		}, data);
 
 	// add button for deleting all cached models
-	obs_properties_add_button(
+	obs_properties_add_button2(
 		ppts, "delete_models", MT_("Delete_Cached_Models"),
 		[](obs_properties_t *props, obs_property_t *property, void *data_) {
 			UNUSED_PARAMETER(props);
@@ -223,7 +223,7 @@ obs_properties_t *squawk_source_properties(void *data)
 			// release settings
 			obs_data_release(settings);
 			return true;
-		});
+		}, data);
 
 	// add boolean propery for enabling phonetic transcription
 	obs_properties_add_bool(ppts, "phonetic_transcription", MT_("Phonetic_Transcription"));

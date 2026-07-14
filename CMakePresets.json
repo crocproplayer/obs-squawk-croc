@@ -54,11 +54,19 @@
         "lhs": "${hostSystemName}",
         "rhs": "Windows"
       },
-      "generator": "Visual Studio 17 2022",
+      "generator": "Visual Studio 18 2026",
       "architecture": "x64",
       "warnings": {"dev": true, "deprecated": true},
       "cacheVariables": {
-        "CMAKE_SYSTEM_VERSION": "10.0.18363.657"
+        "CMAKE_SYSTEM_VERSION": "10.0.18363.657",
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "$penv{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        },
+        "OBS_STUDIO_DIR": "C:/dev/obs-studio/build",
+        "libobs_DIR": "C:/dev/obs-studio/build",
+        "CMAKE_CONFIGURATION_TYPES": "Release",
+        "CMAKE_WARN_DEPRECATED": "OFF"
       }
     },
     {
@@ -145,14 +153,14 @@
       "configurePreset": "windows-x64",
       "displayName": "Windows x64",
       "description": "Windows build for x64",
-      "configuration": "RelWithDebInfo"
+      "configuration": "Release"
     },
     {
       "name": "windows-ci-x64",
       "configurePreset": "windows-ci-x64",
       "displayName": "Windows x64 CI",
-      "description": "Windows CI build for x64 (RelWithDebInfo configuration)",
-      "configuration": "RelWithDebInfo"
+      "description": "Windows CI build for x64 (Release configuration)",
+      "configuration": "Release"
     },
     {
       "name": "linux-x86_64",
