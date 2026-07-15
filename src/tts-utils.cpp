@@ -72,7 +72,7 @@ std::string phonetic_transcription(const std::string &text)
 
 	// find standalone letters in the text, use a regular expression
 	// to find all standalone letters in the text
-	std::regex standalone_letter("\b[a-zA-Z]\b");
+	std::regex standalone_letter("\\b[a-zA-Z]\\b");
 	std::smatch match;
 	std::string result = text;
 

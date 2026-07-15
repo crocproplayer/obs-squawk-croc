@@ -24,7 +24,6 @@ uint64_t now_ms()
 InputThread::InputThread()
 	: running(false),
 	  interval(1000),
-	  lastChangeTimeFile(now_ms()),
 	  lastChangeTimeSource(now_ms())
 {
 }
@@ -35,31 +34,6 @@ void InputThread::run()
 		obs_log(LOG_DEBUG, "Input thread checking for changes");
 
 		std::string new_content_for_generation;
-
-		// Monitor files for changes
-		if (!file.empty()) {
-			// Check if file has changed
-			// get file contents from file
-			std::string fileContents;
-			// read file
-			std::filesystem::path filePath(file);
-			if (std::filesystem::exists(filePath)) {
-				std::ifstream fileStream(filePath);
-				if (fileStream.is_open()) {
-					std::stringstream buffer;
-					buffer << fileStream.rdbuf();
-					fileContents = buffer.str();
-					fileStream.close();
-				} else {
-					obs_log(LOG_ERROR, "Failed to open file: %s", file.c_str());
-				}
-			}
-			if (fileContents != lastFileValue) {
-				new_content_for_generation = fileContents;
-				this->lastFileValue = fileContents;
-				this->lastChangeTimeFile = now_ms();
-			}
-		}
 
 		// Monitor OBS text sources for changes
 		if (!obsTextSource.empty()) {
@@ -87,13 +61,10 @@ void InputThread::run()
 			// If debounce mode is enabled, wait for a certain interval before
 			// generating speech
 			uint64_t currentTime = now_ms();
-			uint64_t timeSinceLastChangeFile = currentTime - lastChangeTimeFile;
 			uint64_t timeSinceLastChangeSource = currentTime - lastChangeTimeSource;
-			if (timeSinceLastChangeFile > interval &&
-			    timeSinceLastChangeFile < (interval * 2)) {
-				new_content_for_generation = lastFileValue;
-			} else if (timeSinceLastChangeSource > interval &&
-				   timeSinceLastChangeSource < (interval * 2)) {
+			
+			if (timeSinceLastChangeSource > interval &&
+				timeSinceLastChangeSource < (interval * 2)) {
 				new_content_for_generation = lastOBSTextSourceValue;
 			} else {
 				new_content_for_generation.clear();

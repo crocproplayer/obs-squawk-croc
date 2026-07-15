@@ -1,3 +1,23 @@
+/*
+OBS Squawk Plugin
+Copyright (C) 2024 Roy Shilkrot roy.shil@gmail.com
+Copyright (C) 2026 croc-pro-dev
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program. If not, see <https://www.gnu.org/licenses/>
+
+*/
+
 #include <obs-module.h>
 
 #ifdef __cplusplus
@@ -18,7 +38,7 @@ void squawk_source_show(void *data);
 void squawk_source_hide(void *data);
 
 const char *const PLUGIN_INFO_TEMPLATE =
-	"<a href=\"https://github.com/occ-ai/obs-squawk/\">Squawk</a> (%s) by "
+	"<a href=\"https://github.com/occ-ai/obs-squawk/\">Squawk</a> (%s) C5 by "
 	"<a href=\"https://github.com/occ-ai\">OCC AI</a> ❤️ "
 	"<a href=\"https://www.patreon.com/RoyShilkrot\">Support & Follow</a>";
 

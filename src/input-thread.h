@@ -31,7 +31,6 @@ public:
 		}
 	}
 
-	void setFile(const std::string &filePath) { file = filePath; }
 	void setReadingMode(ReadingMode mode) { readingMode = mode; }
 	void setInterval(uint32_t milliseconds) { interval = milliseconds; }
 	void setDebounceMode(DebouceMode mode) { debounceMode = mode; }
@@ -46,15 +45,12 @@ public:
 private:
 	std::atomic<bool> running;
 	std::thread thread;
-	std::string file;
 	std::string obsTextSource;
 	std::function<void(const std::string &)> speechGenerationCallback;
 	uint32_t interval = 1000;
-	std::string lastFileValue;
 	std::string lastOBSTextSourceValue;
 	ReadingMode readingMode = ReadingMode::Whole;
 	DebouceMode debounceMode = DebouceMode::Debounced;
-	uint64_t lastChangeTimeFile = 0;
 	uint64_t lastChangeTimeSource = 0;
 	bool debounceGenerated = false;
 

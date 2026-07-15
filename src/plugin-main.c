@@ -1,6 +1,7 @@
 /*
 OBS Squawk Plugin
 Copyright (C) 2024 Roy Shilkrot roy.shil@gmail.com
+Copyright (C) 2026 croc-pro-dev
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -14,10 +15,10 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with this program. If not, see <https://www.gnu.org/licenses/>
+
 */
 
 #include <obs-module.h>
-
 #include "plugin-support.h"
 
 OBS_DECLARE_MODULE()
@@ -25,14 +26,17 @@ OBS_MODULE_USE_DEFAULT_LOCALE(PLUGIN_NAME, "en-US")
 
 extern struct obs_source_info squawk_source_info;
 
-bool obs_module_load(void)
+MODULE_EXPORT bool obs_module_load(void)
 {
+	obs_log(LOG_INFO, "====== SQUAWK: obs_module_load INITIATED ======");
+	
 	obs_register_source(&squawk_source_info);
-	obs_log(LOG_INFO, "plugin loaded successfully (version %s)", PLUGIN_VERSION);
+	
+	obs_log(LOG_INFO, "====== SQUAWK: obs_register_source SUCCESS ======");
 	return true;
 }
 
-void obs_module_unload(void)
+MODULE_EXPORT void obs_module_unload(void)
 {
-	obs_log(LOG_INFO, "plugin unloaded");
+	obs_log(LOG_INFO, "====== SQUAWK: obs_module_unload INITIATED ======");
 }
